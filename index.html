@@ -7,34 +7,61 @@
     <title>Calculator</title>
 </head>
 <body>
-    <div class="wrap">
-        <form name="calc">
-            <input type="text" class="display" name="display"><br>
-            <input type="button" class="button" value="C" onclick="calc.display.value=''" id="delete">
-            <input type="button" class="button" value="/" onclick="calc.display.value+='/'">
-            <input type="button" class="button" value="*" onclick="calc.display.value+='*'">
-            <input type="button" class="button" value="<-" onclick="calc.display.value=calc.display.value.slice(0,-1)"><br>
-            
-            <input type="button" class="button" value="7" onclick="calc.display.value+='7'">
-            <input type="button" class="button" value="8" onclick="calc.display.value+='8'">
-            <input type="button" class="button" value="9" onclick="calc.display.value+='9'">
-            <input type="button" class="button" value="-" onclick="calc.display.value+='-'"><br>
 
-            <input type="button" class="button" value="4" onclick="calc.display.value+='4'">
-            <input type="button" class="button" value="5" onclick="calc.display.value+='5'">
-            <input type="button" class="button" value="6" onclick="calc.display.value+='6'">
-            <input type="button" class="button" value="+" onclick="calc.display.value+='+'"><br>
+<div class="wrap">
+    <form name="calc" onsubmit="return false;">
+        <input type="text" class="display" name="display" readonly>
 
-            <input type="button" class="button" value="1" onclick="calc.display.value+='1'">
-            <input type="button" class="button" value="2" onclick="calc.display.value+='2'">
-            <input type="button" class="button" value="3" onclick="calc.display.value+='3'">
-            <input type="button" class="button" value="%" onclick="calc.display.value+='%'"><br>
+        <div class="buttons">
+            <button type="button" onclick="clearDisplay()">C</button>
+            <button type="button" onclick="append('/')">/</button>
+            <button type="button" onclick="append('*')">*</button>
+            <button type="button" onclick="backspace()">←</button>
 
-            <input type="button" class="button" value="." onclick="calc.display.value+='.'">
-            <input type="button" class="button" value="0" onclick="calc.display.value+='0'">
-            <input type="button" class="button" value="=" onclick="calc.display.value=eval(calc.display.value)">
+            <button type="button" onclick="append('7')">7</button>
+            <button type="button" onclick="append('8')">8</button>
+            <button type="button" onclick="append('9')">9</button>
+            <button type="button" onclick="append('-')">-</button>
 
-        </form>
-    </div>
+            <button type="button" onclick="append('4')">4</button>
+            <button type="button" onclick="append('5')">5</button>
+            <button type="button" onclick="append('6')">6</button>
+            <button type="button" onclick="append('+')">+</button>
+
+            <button type="button" onclick="append('1')">1</button>
+            <button type="button" onclick="append('2')">2</button>
+            <button type="button" onclick="append('3')">3</button>
+            <button type="button" onclick="append('%')">%</button>
+
+            <button type="button" onclick="append('.')">.</button>
+            <button type="button" onclick="append('0')">0</button>
+            <button type="button" class="equal" onclick="calculate()">=</button>
+        </div>
+    </form>
+</div>
+
+<script>
+function append(value){
+    document.calc.display.value += value;
+}
+
+function clearDisplay(){
+    document.calc.display.value = "";
+}
+
+function backspace(){
+    let val = document.calc.display.value;
+    document.calc.display.value = val.slice(0,-1);
+}
+
+function calculate(){
+    try{
+        document.calc.display.value = eval(document.calc.display.value);
+    }catch{
+        document.calc.display.value = "Error";
+    }
+}
+</script>
+
 </body>
 </html>
